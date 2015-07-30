@@ -31,7 +31,6 @@
     "browser"
   ],
   "pre-commit": [
-    "list",
     "test"
   ],
   "author": "Carlos Villuendas <carlosvillu@gmail.com>",
