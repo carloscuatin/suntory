@@ -1,0 +1,10 @@
+docs/
+src/
+test/
+.babelrc
+.DS_Store
+.editorconfig
+.jscsrc
+.gitignore
+suntory.gif
+karma.conf.js
