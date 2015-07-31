@@ -8,17 +8,19 @@ const DELEGATE_EVENT_SPLITTER = /^(\S+)\s*(.*)$/;
 
 const suntory = (events) => {
   return (Target) => {
-    return !events ? Target : class extends Component {
+    return !events ? Target : class extends Target {
       constructor() {
         super();
         this.events = events;
       }
 
-      componentDidMount() {
+      componentDidMount(...args) {
+        super.componentDidMount && super.componentDidMount.apply(this, args);
         this.toggleEvent('on');
       }
 
       componentWillUnmount() {
+        super.componentWillUnmount && super.componentWillUnmount.apply(this, args);
         this.toggleEvent('off')
       }
 
