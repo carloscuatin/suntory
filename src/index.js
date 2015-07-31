@@ -7,11 +7,8 @@ import './vendor/delegatePolyfill';
 const DELEGATE_EVENT_SPLITTER = /^(\S+)\s*(.*)$/;
 
 const suntory = (events) => {
-  // Throttle version of each function to avoid multiple calls
-  for(let key in events){ events[key] = events[key].throttle(50); }
-
   return (Target) => {
-    return !events ? Target : class extends Target {
+    return !events ? Target : class Suntory extends Target {
       constructor() {
         super();
         this.events = events;
@@ -39,10 +36,6 @@ const suntory = (events) => {
 
           parentDOM[action].call(parentDOM, event, selector, handler.bind(this));
         }
-      }
-
-      render() {
-        return <Target {...this.props} />
       }
 
     };

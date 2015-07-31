@@ -1,5 +1,6 @@
 import React from 'react';
 import suntory from '../src';
+import {rosetta} from '@schibstedspain/rosetta';
 import './index.scss';
 
 class Item extends React.Component {
@@ -8,8 +9,9 @@ class Item extends React.Component {
   }
 }
 
+@rosetta
 @suntory({
-  'mouseover [data-click]': function(e) { console.log(e.target) }
+  'click [data-click]': function(e) { console.log(e.target) }
 })
 class List extends React.Component {
   render() {
