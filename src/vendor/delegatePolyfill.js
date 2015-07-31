@@ -20,4 +20,8 @@ Node.prototype.on = window.on = function (name, delegate, fn) {
       return fn.apply(e.target, arguments);
     }
   })
-}
+};
+
+Node.prototype.off = window.off = function(name, delegate, fn) {
+  return this.removeEventListener(name, fn || delegate);
+};

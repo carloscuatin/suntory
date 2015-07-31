@@ -15,20 +15,24 @@ const suntory = (events) => {
       }
 
       componentDidMount() {
-        this.attachEvents(events);
+        this.toggleEvent('on');
       }
 
-      attachEvents() {
+      componentWillUnmount() {
+        this.toggleEvent('off')
+      }
+
+      toggleEvent(action) {
         const parentDOM = React.findDOMNode(this);
         for(let key in this.events) {
           const handler = events[key];
           const [key, event, selector] = key.match(DELEGATE_EVENT_SPLITTER);
           if(typeof handler !== 'function') {
-            console && console.warn(`[Suntory] The handler for the event ${key} is not a function`);
+            console && console.warn(`[Suntory#${action}] The handler for the event ${key} is not a function`);
             continue;
           }
 
-          parentDOM.on(event, selector, handler.bind(this));
+          parentDOM[action].call(parentDOM, event, selector, handler.bind(this));
         }
       }
 
