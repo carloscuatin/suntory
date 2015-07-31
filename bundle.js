@@ -72,7 +72,7 @@ var List = (function (_React$Component2) {
 
   var _List = List;
   List = (0, _src2['default'])({
-    'mouseover [data-click]': function mouseoverDataClick(e) {
+    'click [data-click]': function clickDataClick(e) {
       console.log(e.target);
     }
   })(List) || List;
@@ -19925,24 +19925,35 @@ var DELEGATE_EVENT_SPLITTER = /^(\S+)\s*(.*)$/;
 
 var suntory = function suntory(events) {
   return function (Target) {
-    return !events ? Target : (function (_Component) {
-      _inherits(_class, _Component);
+    return !events ? Target : (function (_Target) {
+      _inherits(Suntory, _Target);
 
-      function _class() {
-        _classCallCheck(this, _class);
+      function Suntory() {
+        _classCallCheck(this, Suntory);
 
-        _get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this);
+        _get(Object.getPrototypeOf(Suntory.prototype), 'constructor', this).call(this);
         this.events = events;
       }
 
-      _createClass(_class, [{
+      _createClass(Suntory, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-          this.attachEvents(events);
+          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          _get(Object.getPrototypeOf(Suntory.prototype), 'componentDidMount', this) && _get(Object.getPrototypeOf(Suntory.prototype), 'componentDidMount', this).apply(this, args);
+          this.toggleEvent('on');
         }
       }, {
-        key: 'attachEvents',
-        value: function attachEvents() {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+          _get(Object.getPrototypeOf(Suntory.prototype), 'componentWillUnmount', this) && _get(Object.getPrototypeOf(Suntory.prototype), 'componentWillUnmount', this).apply(this, args);
+          this.toggleEvent('off');
+        }
+      }, {
+        key: 'toggleEvent',
+        value: function toggleEvent(action) {
           var parentDOM = _react2['default'].findDOMNode(this);
           for (var key in this.events) {
             var handler = events[key];
@@ -19956,22 +19967,17 @@ var suntory = function suntory(events) {
             var selector = _key$match2[2];
 
             if (typeof handler !== 'function') {
-              console && console.warn('[Suntory] The handler for the event ' + key + ' is not a function');
+              console && console.warn('[Suntory#' + action + '] The handler for the event ' + key + ' is not a function');
               continue;
             }
 
-            parentDOM.on(_event, selector, handler.bind(this));
+            parentDOM[action].call(parentDOM, _event, selector, handler.bind(this));
           }
-        }
-      }, {
-        key: 'render',
-        value: function render() {
-          return _react2['default'].createElement(Target, this.props);
         }
       }]);
 
-      return _class;
-    })(_react.Component);
+      return Suntory;
+    })(Target);
   };
 };
 
@@ -20000,6 +20006,10 @@ Node.prototype.on = window.on = function (name, delegate, fn) {
       return fn.apply(e.target, arguments);
     }
   });
+};
+
+Node.prototype.off = window.off = function (name, delegate, fn) {
+  return this.removeEventListener(name, fn || delegate);
 };
 
 },{}]},{},[1]);

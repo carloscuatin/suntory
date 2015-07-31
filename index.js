@@ -9,7 +9,7 @@ class Item extends React.Component {
 }
 
 @suntory({
-  'mouseover [data-click]': function(e) { console.log(e.target) }
+  'click [data-click]': function(e) { console.log(e.target) }
 })
 class List extends React.Component {
   render() {
