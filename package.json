@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/suntory",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Append arbitrary events at your ReactJS components",
   "main": "lib/",
   "scripts": {
