@@ -7,7 +7,6 @@ if (Element && !Element.prototype.matches) {
         proto.oMatchesSelector || proto.webkitMatchesSelector;
 }
 
-
 // Gist from https://gist.github.com/paulirish/12fb951a8b893a454b32#gistcomment-1474623
 // Delegate event polyfill
 Node.prototype.on = window.on = function (name, delegate, fn) {
@@ -25,3 +24,29 @@ Node.prototype.on = window.on = function (name, delegate, fn) {
 Node.prototype.off = window.off = function(name, delegate, fn) {
   return this.removeEventListener(name, fn || delegate);
 };
+
+// Throttle utilitie
+// From https://remysharp.com/2010/07/21/throttling-function-calls
+Function.prototype.throttle = function(threshhold, scope) {
+  threshhold || (threshhold = 250);
+  var last,
+      deferTimer,
+      self = this;
+  return function () {
+    var context = scope || this;
+
+    var now = +new Date,
+        args = arguments;
+    if (last && now < last + threshhold) {
+      // hold on to it
+      clearTimeout(deferTimer);
+      deferTimer = setTimeout(function () {
+        last = now;
+        self.apply(context, args);
+      }, threshhold);
+    } else {
+      last = now;
+      self.apply(context, args);
+    }
+  };
+}

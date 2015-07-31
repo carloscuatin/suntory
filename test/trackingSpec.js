@@ -68,6 +68,9 @@ describe('Suntory', () => {
     });
 
     xit('Expect calling with the original event', () => {});
+    xit('Expect play well with static methods', () => {});
+    xit('Expect play well other decorators', () => {});
+    xit('Expect call to suntory with without browser', () => {});
   });
 
 });
