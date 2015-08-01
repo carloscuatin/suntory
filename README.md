@@ -27,7 +27,7 @@ $ npm install @schibstedspain/suntory
 ### Clone the repo
 
 ```
-$ npm clone https://github.com/SUI-Components/suntory
+$ git clone https://github.com/SUI-Components/suntory
 $ cd suntory
 $ npm install
 $ npm run dev
@@ -49,12 +49,6 @@ Suntory es un decorador que te va a permitir de forma simple delegar eventos a t
 ```javascript
 import suntory from '@schibstedspain/suntory';
 
-class Item extends React.Component {
-  render() {
-    return <li className="List-item" data-click>{this.props.text}</li>;
-  }
-}
-
 @suntory({
   'mouseover [data-click]': function(e) { console.log(e.target) }
 })
@@ -71,6 +65,12 @@ class List extends React.Component {
           </ul>
         </div>
     )
+  }
+}
+
+class Item extends React.Component {
+  render() {
+    return <li className="List-item" data-click>{this.props.text}</li>;
   }
 }
 ```
