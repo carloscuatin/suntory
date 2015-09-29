@@ -14,9 +14,8 @@
     "test": "karma start --single-run",
     "test:watch": "karma start",
     "test:nyan": "npm run test -- --reporters nyan",
-    "lint": "npm run lint:jscs && npm run lint:eslint",
-    "lint:jscs": "cat ./{src,test}/**/*.js | jscs",
-    "lint:eslint": "eslint --ext=\".js\" src/",
+    "lint": "npm run lint:eslint",
+    "lint:eslint": "eslint --ignore-pattern=\"src/vendor/*.js\" --ext=\".js\" --ext=\".jsx\" src/",
     "predoc": "browserify -t babelify docs/index.js -o docs/bundle.js",
     "doc": "npm run doc:build",
     "doc:build": "gh-pages -d docs"
@@ -31,7 +30,8 @@
     "browser"
   ],
   "pre-commit": [
-    "test"
+    "test",
+    "lint"
   ],
   "author": "Carlos Villuendas <carlosvillu@gmail.com>",
   "license": "MIT",
@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/SUI-Components/suntory#readme",
   "devDependencies": {
-    "@schibstedspain/frontend-pre-commit-rules": "^5.0.0",
+    "@schibstedspain/frontend-pre-commit-rules": "latest",
     "babel": "^5.6.14",
     "babel-eslint": "~3.1.14",
     "babel-jscs": "^1.0.1",
@@ -50,7 +50,6 @@
     "eslint": "^0.24.1",
     "eslint-plugin-react": "^2.7.0",
     "gh-pages": "^0.3.1",
-    "jscs": "^1.13.1",
     "karma": "^0.12.31",
     "karma-browserify": "^4.1.2",
     "karma-chrome-launcher": "^0.1.8",

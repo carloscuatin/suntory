@@ -1,4 +1,4 @@
-/* eslint no-unused-vars:0 */
+/* eslint no-unused-vars:0, no-console:0, no-unused-expressions:0 */
 
 import React, {Component} from 'react';
 import './vendor/delegatePolyfill';
@@ -19,16 +19,16 @@ const suntory = (events) => {
         this.toggleEvent('on');
       }
 
-      componentWillUnmount() {
+      componentWillUnmount(...args) {
         super.componentWillUnmount && super.componentWillUnmount.apply(this, args);
-        this.toggleEvent('off')
+        this.toggleEvent('off');
       }
 
       toggleEvent(action) {
         const parentDOM = React.findDOMNode(this);
-        for(let key in this.events) {
-          const handler = events[key];
-          const [key, event, selector] = key.match(DELEGATE_EVENT_SPLITTER);
+        for(let eventItem in this.events) {
+          const handler = events[eventItem];
+          const [key, event, selector] = eventItem.match(DELEGATE_EVENT_SPLITTER);
           if(typeof handler !== 'function') {
             console && console.warn(`[Suntory#${action}] The handler for the event ${key} is not a function`);
             continue;
