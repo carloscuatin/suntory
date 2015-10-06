@@ -1,6 +1,7 @@
 /* eslint no-unused-vars:0, no-console:0, no-unused-expressions:0 */
 
-import React, {Component} from 'react';
+import {Component} from 'react';
+import ReactDom from 'react-dom';
 import './vendor/delegatePolyfill';
 
 // Borrowed from https://github.com/jashkenas/backbone/blob/master/backbone.js#L1178
@@ -25,7 +26,7 @@ const suntory = (events) => {
       }
 
       toggleEvent(action) {
-        const parentDOM = React.findDOMNode(this);
+        const parentDOM = ReactDom.findDOMNode(this);
         for(let eventItem in this.events) {
           const handler = events[eventItem];
           const [key, event, selector] = eventItem.match(DELEGATE_EVENT_SPLITTER);

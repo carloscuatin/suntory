@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import suntory from '../src';
 import './index.scss';
 
@@ -27,4 +28,4 @@ class List extends React.Component {
   }
 }
 
-React.render(<List />, document.getElementById('container'));
+ReactDom.render(<List />, document.getElementById('container'));
